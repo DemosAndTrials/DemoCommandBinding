@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DemoCommandBinding.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,19 @@ namespace DemoCommandBinding
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        CustomerViewModel ViewModel;
+
         public MainPage()
         {
             this.InitializeComponent();
+            ViewModel = new ViewModel.CustomerViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            CustomerGridView.DataContext = ViewModel;
+            base.OnNavigatedTo(e);
         }
     }
 }
