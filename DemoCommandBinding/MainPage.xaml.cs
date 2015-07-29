@@ -1,4 +1,5 @@
-﻿using DemoCommandBinding.ViewModel;
+﻿using DemoCommandBinding.Common;
+using DemoCommandBinding.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,6 +38,17 @@ namespace DemoCommandBinding
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Customers1 = InitializeSampleData.GetData();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Customers2 = InitializeSampleData.GetData();
+
         }
     }
 }

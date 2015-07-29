@@ -24,8 +24,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Press button" FontSize="25" Padding="5"/>
-            <TextBlock Grid.Column="1" Text="Tap on item" FontSize="25" Padding="5"/>
+            <TextBlock Grid.Column="0" Text="Press button" FontSize="25" Padding="5" VerticalAlignment="Center"/>
+            <Button Grid.Column="0" Content="Refresh" FontSize="15" Margin="25,0" HorizontalAlignment="Right" Click="Button_Click"/>
+            <TextBlock Grid.Column="1" Text="Tap on item" FontSize="25" Padding="5" VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Content="Refresh" FontSize="15" Margin="25,0" HorizontalAlignment="Right" Click="Button_Click_1"/>
 
             <GridView Name="CustomerGridView1" Grid.Column="0" Grid.Row="1"
                           AutomationProperties.AutomationId="CustomerGridView1"

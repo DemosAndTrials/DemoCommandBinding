@@ -49,6 +49,9 @@ namespace DemoCommandBinding.ViewModel
             Customers1 = InitializeSampleData.GetData();
             Customers2 = InitializeSampleData.GetData();
         }
+
+
+
         #endregion
 
 
