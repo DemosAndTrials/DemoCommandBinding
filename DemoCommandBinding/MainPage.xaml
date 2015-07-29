@@ -6,6 +6,7 @@
     xmlns:converter="using:DemoCommandBinding.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:com="using:DemoCommandBinding.Command"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -13,15 +14,27 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="ContentRoot" Margin="100,50">
-            <GridView Name="CustomerGridView"
-                          AutomationProperties.AutomationId="CustomerGridView"
+        <Grid x:Name="ContentRoot" Margin="50,25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Press button" FontSize="25" Padding="5"/>
+            <TextBlock Grid.Column="1" Text="Tap on item" FontSize="25" Padding="5"/>
+
+            <GridView Name="CustomerGridView1" Grid.Column="0" Grid.Row="1"
+                          AutomationProperties.AutomationId="CustomerGridView1"
                           AutomationProperties.Name="Customer Group"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
                           ScrollViewer.VerticalScrollMode="Enabled"
                           BorderThickness="1"
                           BorderBrush="Black"                                                    
-                          ItemsSource="{Binding Customers}">
+                          ItemsSource="{Binding Customers1}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="200" Height="150">
@@ -42,7 +55,7 @@
                                     <TextBlock Text="Vip:" Style="{StaticResource AppBodyTextStyle}" Margin="0,0,5,0"/>
                                     <TextBlock Text="{Binding Vip}" Style="{StaticResource AppBodyTextStyle}"/>
                                 </StackPanel>
-                                <Button Content="Delete" Margin="0,5,0,0" Command="{Binding DataContext.DeleteCommand, ElementName=CustomerGridView}" CommandParameter="{Binding Id}"/>
+                                <Button Content="Delete" Margin="0,5,0,0" Command="{Binding DataContext.DeleteCommand, ElementName=ContentRoot}" CommandParameter="{Binding Id}"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
@@ -50,11 +63,55 @@
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapGrid MaximumRowsOrColumns="8" VerticalChildrenAlignment="Top"
-					  HorizontalChildrenAlignment="Left" Orientation="Horizontal"/>
+					        HorizontalChildrenAlignment="Left" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
             </GridView>
 
+            <GridView Name="CustomerGridView2" Grid.Column="1" Grid.Row="1"
+                          AutomationProperties.AutomationId="CustomerGridView2"
+                          AutomationProperties.Name="Customer Group"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ScrollViewer.VerticalScrollMode="Enabled"
+                          BorderThickness="1"
+                          BorderBrush="Black" SelectionMode="None"                                                
+                          ItemsSource="{Binding Customers2}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="200" Height="150">
+                            <StackPanel >
+                                <StackPanel Orientation="Horizontal" Margin="3,3,0,3">
+                                    <TextBlock Text="Name:" Style="{StaticResource AppBodyTextStyle}" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource AppBodyTextStyle}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="3,3,0,3">
+                                    <TextBlock Text="Sex:" Style="{StaticResource AppBodyTextStyle}" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Sex, Converter={StaticResource BoolToStringConverter}}" Style="{StaticResource AppBodyTextStyle}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="3,3,0,3">
+                                    <TextBlock Text="Age:" Style="{StaticResource AppBodyTextStyle}" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Age}" Style="{StaticResource AppBodyTextStyle}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="3,3,0,3">
+                                    <TextBlock Text="Vip:" Style="{StaticResource AppBodyTextStyle}" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Vip}" Style="{StaticResource AppBodyTextStyle}"/>
+                                </StackPanel>
+                                <!--<TextBlock Text="Delete label" Margin="0,5,0,0" Padding="3" com:TappedCommand.Command="{Binding DataContext.CustomCommand, ElementName=ContentRoot}"/>-->
+                                <!--<Button Content="Delete" Margin="0,5,0,0" com:TappedCommand.Command="{Binding DataContext.CustomCommand, ElementName=ContentRoot}"/>-->
+                            </StackPanel>
+                            <Grid com:TappedCommand.Command="{Binding DataContext.CustomCommand, ElementName=ContentRoot}"
+                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"/>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid MaximumRowsOrColumns="8" VerticalChildrenAlignment="Top"
+					        HorizontalChildrenAlignment="Left" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+            
         </Grid>
     </Grid>
 </Page>

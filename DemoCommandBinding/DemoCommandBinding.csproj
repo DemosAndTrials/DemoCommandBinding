@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Command\IDelegateCommand.cs" />
+    <Compile Include="Command\TappedCommand.cs" />
     <Compile Include="Common\InitializeSampleData.cs" />
     <Compile Include="Converters\BoolToStringConverter.cs" />
     <Compile Include="MainPage.xaml.cs">

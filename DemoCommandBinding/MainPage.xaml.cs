@@ -30,11 +30,12 @@ namespace DemoCommandBinding
         {
             this.InitializeComponent();
             ViewModel = new ViewModel.CustomerViewModel();
+            ContentRoot.DataContext = ViewModel;
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            CustomerGridView.DataContext = ViewModel;
             base.OnNavigatedTo(e);
         }
     }

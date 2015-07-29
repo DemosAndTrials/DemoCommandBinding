@@ -16,23 +16,23 @@ namespace DemoCommandBinding.ViewModel
         #region Fields and Properties
 
         // This property will be bound to GridView's ItemsDataSource property for providing data
-        private ObservableCollection<Customer> customers;
+        private ObservableCollection<Customer> customers1;
 
         // This property will be bound to button's Command property for deleting item
         public IDelegateCommand DeleteCommand { protected set; get; }
 
-        public ObservableCollection<Customer> Customers
+        public ObservableCollection<Customer> Customers1
         {
             get
             {
-                return customers;
+                return customers1;
             }
             set
             {
-                if (customers != value)
+                if (customers1 != value)
                 {
-                    customers = value;
-                    OnPropertyChanged("Customers");
+                    customers1 = value;
+                    OnPropertyChanged("Customers1");
                 }
             }
         }
@@ -46,7 +46,8 @@ namespace DemoCommandBinding.ViewModel
             this.DeleteCommand = new DelegateCommand(ExecuteDeleteCommand);
 
             // Get data source
-            Customers = InitializeSampleData.GetData();
+            Customers1 = InitializeSampleData.GetData();
+            Customers2 = InitializeSampleData.GetData();
         }
         #endregion
 
@@ -59,7 +60,7 @@ namespace DemoCommandBinding.ViewModel
             Customer cus = GetCustomerById(id);
             if (cus != null)
             {
-                Customers.Remove(cus);
+                Customers1.Remove(cus);
             }
         }
 
@@ -68,7 +69,41 @@ namespace DemoCommandBinding.ViewModel
         // Get the deleting item by Id property
         private Customer GetCustomerById(int id)
         {
-            return Customers.First(x => x.Id == id);
+            return Customers1.First(x => x.Id == id);
+        }
+
+        private ObservableCollection<Customer> customers2;
+        public ObservableCollection<Customer> Customers2
+        {
+            get
+            {
+                return customers2;
+            }
+            set
+            {
+                if (customers2 != value)
+                {
+                    customers2 = value;
+                    OnPropertyChanged("Customers2");
+                }
+            }
+        }
+
+        private DelegateCommand _customCommand;
+        public DelegateCommand CustomCommand
+        {
+            get
+            {
+                if (_customCommand == null)
+                    _customCommand = new DelegateCommand(ExecuteProductTapped);
+
+                return _customCommand;
+            }
+        }
+
+        private void ExecuteProductTapped(object param)
+        {
+            Customers2.Remove(param as Customer);
         }
 
         #region INotifyPropertyChanged
